@@ -1,0 +1,13 @@
+--- # cmnd output program
+- hosts: all
+  remote_user: ansible
+  become: yes
+  tasks:
+    - name: create a file
+      command: touch testfile
+    - name: list of ll files
+      shell: ls > /tmp/fileoutput
+    - name: create directory
+      raw: mkdir /home/ansible/test2
+    - name: execute a script
+      script: ./more.sh
