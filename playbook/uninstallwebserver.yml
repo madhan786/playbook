@@ -1,0 +1,11 @@
+--- # webserver setup
+- hosts: all
+  remote_user: ansible
+  become: yes
+  tasks:
+    - name: uninstalling httpd package
+      yum: name=httpd state=absent
+    - name: remove index.html
+      shell: /bin/rm -rf /var/www/html/
+    
+

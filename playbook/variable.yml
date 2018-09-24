@@ -1,0 +1,24 @@
+--- # variable setup
+- hosts: "{{ host }}"
+  remote_user: ansible
+  become: yes
+  vars:
+     pkg1: httpd
+  vars_files:
+        - abc.yml
+  var_prompt:
+        - name: pkg3
+          prompt: enter package name
+          private: no
+  tasks:
+    - name: installing httpd package
+      yum: name={{pkg1}} state=present
+    - name: copy index.html
+      copy: src=index.html dest=/var/www/html
+    - name: start httpd service
+      service: name={{pkg1}} state=started
+    - name: installing telnet package
+      yum: name={{pkg2}} state=present
+    - name: installing user given package
+      yum: name={{pkg3}} state=present
+    
